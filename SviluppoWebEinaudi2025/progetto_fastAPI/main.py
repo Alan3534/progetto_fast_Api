@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Dict
 from fastapi import FastAPI, Response, HTTPException, status
 from fastapi import Depends
 from schema import User, UserCreate
@@ -6,6 +6,7 @@ from fastapi_login.exceptions import InvalidCredentialsException
 from fastapi_login import LoginManager
 from datetime import timedelta
 import os
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -48,7 +49,49 @@ def register(user: UserCreate):
 
 
 
+@app.get("/info_protetta")
+def profilo_utente(saluto : str , user = Depends(manager)):
+	return saluto + " " + user["username"]
+
+
+
 @app.get("/primo_ingresso")
-def primo_ingresso():
-    return"Ciao! Benvenuto!"
-    
+def primo_ingr():
+    return "ciao Benvenuto"
+
+
+@app.get("/pagina_html", response_class=HTMLResponse)
+def pagina_html():
+    html_content = """
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>Benvenuto</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f9;
+                    color: #333;
+                    text-align: center;
+                    padding: 20px;
+                }
+                h1 {
+                    color: #4CAF50;
+                }
+                a {
+                    text-decoration: none;
+                    color: #4CAF50;
+                }
+                a:hover {
+                    text-decoration: underline;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Benvenuto nella mia applicazione FastAPI!</h1>
+            <p>Questa è una semplice pagina HTML restituita da un endpoint FastAPI.</p>
+            <a href="/primo_ingresso">Vai all'endpoint /primo_ingresso</a>
+        </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content)

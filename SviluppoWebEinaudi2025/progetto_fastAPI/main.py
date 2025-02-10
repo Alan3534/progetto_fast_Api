@@ -1,5 +1,5 @@
 from typing import Dict
-from fastapi import FastAPI, Response, HTTPException, status
+from fastapi import FastAPI, Response, HTTPException, status, Request
 from fastapi import Depends
 from schema import User, UserCreate
 from fastapi_login.exceptions import InvalidCredentialsException
@@ -7,9 +7,12 @@ from fastapi_login import LoginManager
 from datetime import timedelta
 import os
 from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
 app = FastAPI()
-
+app.mount("/static", StaticFiles(directory="static"), name="static") 
+templates = Jinja2Templates(directory="templates")
 SECRET = os.urandom(24).hex()
 manager = LoginManager(SECRET, '/login', use_cookie=True, default_expiry = timedelta(minutes=20))
 
@@ -58,6 +61,11 @@ def profilo_utente(saluto : str , user = Depends(manager)):
 @app.get("/primo_ingresso")
 def primo_ingr():
     return "ciao Benvenuto"
+
+# Route per restituire la pagina HTML
+@app.get("/")
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request, "titolo": "Homepage"})
 
 
 @app.get("/pagina_html", response_class=HTMLResponse)

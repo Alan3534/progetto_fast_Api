@@ -1,0 +1,105 @@
+/* Reset dei margini e padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Impostazioni generali per il body */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1d2b64, #f8cdda);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenitore del login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Box del login */
+.login-box {
+    background: white;
+    padding: 40px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    max-width: 100%;
+}
+
+/* Titolo del login */
+.login-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form, campi di input */
+.textbox {
+    margin-bottom: 20px;
+}
+
+.textbox input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+/* Focus sugli input */
+.textbox input:focus {
+    border-color: #1d2b64;
+}
+
+/* Pulsante di login */
+.btn-login {
+    width: 100%;
+    background-color: #1d2b64;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover sul pulsante */
+.btn-login:hover {
+    background-color: #0c1a40;
+}
+
+/* Testo per la registrazione */
+p {
+    margin-top: 20px;
+    color: #555;
+}
+
+p a {
+    text-decoration: none;
+    color: #1d2b64;
+    font-weight: bold;
+}
+
+/* Styling per "Ricordami" */
+.remember-me {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.remember-me input {
+    margin-right: 5px;
+}
